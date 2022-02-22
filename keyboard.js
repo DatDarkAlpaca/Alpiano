@@ -8,6 +8,11 @@ const whiteKeyWidth = 80;
 const keyboardHeight = 400;
 
 const app = {
+
+    constructor() {
+        this.mouse_down = false;
+    },
+
     setupKeyboard() {
         const keyboard = document.querySelector("#keyboard");
 
@@ -127,12 +132,21 @@ const app = {
         key.addEventListener('mousedown', () => {
             this.displayNote(noteName);
             playNoteSymbol(noteName);
+            app.mouse_down = true;
         });
 
         key.addEventListener('mouseup', () => {
             this.hideNote(noteName);
             onNoteReleased(noteName);
+            app.mouse_down = false;
         });
+
+        key.addEventListener('mouseenter', () => {
+            if(app.mouse_down === true) {
+                this.displayNote(noteName);
+                playNoteSymbol(noteName);
+            }
+        })
 
         key.addEventListener('mouseleave', () => {
             this.hideNote(noteName);
