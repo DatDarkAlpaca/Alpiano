@@ -209,6 +209,10 @@ const app = {
     displayNote(note){
         const keyboardKeys = document.querySelectorAll(".key");
 
+        const displayText = document.querySelector(".chord-display");
+        console.log(displayText);
+        displayText.innerHTML = note;
+
         keyboardKeys.forEach(key => {
             const naturalName = key.dataset.noteName;
             const sharpName = key.dataset.sharpName;

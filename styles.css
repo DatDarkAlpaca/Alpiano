@@ -6,6 +6,55 @@
 #keyboard {
     clip-path: inset(15px 0px 0px 0px);
     margin-top: -15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.start-btn {
+    position: relative;
+    left: 2%;
+    top: 5%;
+
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.keyboard-display{
+    background-color:#3C3C3C;
+    height: 200px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top:50px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.keyboard-separator {
+    background-color:#2C2C2C;
+    margin-right: 20px;
+    margin-left: 20px;
+    height: 15px;
+}
+
+.chord-display {
+    transform: translate(-80px, 0px);
+    background-color: #979797;
+    position: relative;
+    height: 160px;
+    width: 160px;
+    border-radius: 10px;
+
+    top: 0px;
+    left: 50%;
+    
+    font-family:'Lucida Sans', 'Lucida Sans Regular', Geneva, sans-serif;
+    font-size: 32px;
+    color: #FFFFF7;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 160px;
 }
 
 .white-key {
