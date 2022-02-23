@@ -12,15 +12,39 @@
     <title>Alpiano</title>
 </head>
 <body>
-    <div class="keyboard-body">
-    <div class="keyboard-display">
-        <button class="start-btn"> Start </button>
-        <div class="chord-display"> D3 </div>
-    </div>
-    <div class="keyboard-separator"></div>
-    
-    <div id="keyboard"></div>   
 
+    <div class="keyboard-top">
+        <!--<button class="start-btn"> Start </button> -->
+
+        <span class="menu-key-range"> 
+            <a class="menu-key-btn">+</a> 
+            <a id="key-menu-end">C5</a>
+            <a class="menu-key-btn">-</a> </span>
+
+        <span class="menu-key-range"> 
+            <a class="menu-key-btn">+</a> 
+            <a id="key-menu-start">C3</a> 
+            <a class="menu-key-btn">-</a> 
+        </span>
+        
+        <span class="menu-display"> Alpiano </span>
+
+        
+    </div>
+    
+    <div class="keyboard-separator">
+        <nav class="separator-nav">
+            <a class="nav-element"> Home </a>
+            <a class="nav-element"> Settings </a>
+            <a class="nav-element"> Chords </a>
+            <a class="nav-element"> Scales </a>
+            <a class="nav-element"> Sheets </a>
+        </nav>
+    </div>
+    
+    <div class="keyboard-bottom">
+        <div id="keyboard"></div>
+    </div>
     
 </body>
 </html>
