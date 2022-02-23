@@ -2,7 +2,7 @@ const naturalKeys = ["C", "D", "E", "F", "G", "A", "B"];
 const sharpKeys   = ["C", "D", "F", "G", "A"];
 const flatKeys    = ["D", "E", "G", "A", "B"];
 
-const range = ["B3", "C5"];
+const range = ["C2", "C5"];
 let offsetSet = false;
 
 const whiteKeyWidth = 80;

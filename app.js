@@ -1,15 +1,9 @@
 // Audio Context:
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-let ctx;
+let ctx = new AudioContext();
 
 // Oscilators:
 const oscilators = {};
-
-// Context Start Button:
-const ctxStartButton = document.querySelector('button');
-ctxStartButton.addEventListener('click', () => {
-    ctx = new AudioContext();
-});
 
 // Convert MIDI to Frequency:
 function midiToFrequency(note) {
@@ -116,6 +110,8 @@ function playNoteSymbol(note) {
 }
 
 function onNotePressed(note, velocity) {
+    ctx.resume();
+
     if(!ctx) {
         return;
     }
