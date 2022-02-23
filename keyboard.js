@@ -2,7 +2,8 @@ const naturalKeys = ["C", "D", "E", "F", "G", "A", "B"];
 const sharpKeys   = ["C", "D", "F", "G", "A"];
 const flatKeys    = ["D", "E", "G", "A", "B"];
 
-const range = ["C3", "C5"];
+const range = ["B3", "C5"];
+let offsetSet = false;
 
 const whiteKeyWidth = 80;
 const keyboardHeight = 400;
@@ -73,6 +74,12 @@ const app = {
                 let flatName  = flatKeys[i];
 
                 if(sharpName === naturalNote[0]) {
+
+                    if ((range[0][0] === 'E' || range[0][0] === 'B') && !offsetSet) {
+                        blackKeyX += whiteKeyWidth;      
+                        offsetSet = true;            
+                    }
+
                     utils.setAttributes(blackKey, {
                         "x": blackKeyX,
                         "data-sharp-name": `${sharpName}#${naturalNote[1]}`,
@@ -115,6 +122,7 @@ const app = {
         });
 
         keyboard.appendChild(SVG);
+        offsetSet = false;
     },
 
     editKeyboard(){
@@ -176,6 +184,12 @@ const app = {
                 let flatName  = flatKeys[i];
 
                 if(sharpName === naturalNote[0]) {
+                    
+                    if ((range[0][0] === 'E' || range[0][0] === 'B') && !offsetSet) {
+                        blackKeyX += whiteKeyWidth;      
+                        offsetSet = true;            
+                    }
+
                     utils.setAttributes(blackKey, {
                         "x": blackKeyX,
                         "data-sharp-name": `${sharpName}#${naturalNote[1]}`,
@@ -216,6 +230,8 @@ const app = {
 
             SVG.appendChild(blackKeyTextGroup);
         });
+
+        offsetSet = false;
     },
 
     /*
