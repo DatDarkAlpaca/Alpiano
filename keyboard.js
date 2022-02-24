@@ -8,6 +8,17 @@ let offsetSet = false;
 const whiteKeyWidth = 80;
 const keyboardHeight = 400;
 
+let mode = 'freeplay';
+
+document.querySelector("#nav-home").addEventListener('click', () => {
+    mode = 'freeplay';
+});
+
+document.querySelector("#nav-chords").addEventListener('click', () => {
+    mode = 'chords';
+});
+
+
 const app = {
 
     constructor() {
@@ -239,7 +250,6 @@ const app = {
     */
     setupMenuKey() {
         const keys = document.querySelectorAll(".menu-key-btn");
-        console.log(keys);
 
         keys[0].addEventListener('click', () => {   // End +
             const key = range[0];
@@ -247,7 +257,6 @@ const app = {
             if (key.length === 2) {
                 const keyLetter = range[1][0];
                 const octave = range[1][1];
-                console.log(keyLetter, octave);
 
                 const keyPos = naturalKeys.indexOf(keyLetter);
 
@@ -270,7 +279,6 @@ const app = {
             if (key.length === 2) {
                 const keyLetter = range[1][0];
                 const octave = range[1][1];
-                console.log(keyLetter, octave);
 
                 const keyPos = naturalKeys.indexOf(keyLetter);
 
@@ -293,7 +301,6 @@ const app = {
             if (key.length === 2) {
                 const keyLetter = range[0][0];
                 const octave = range[0][1];
-                console.log(keyLetter, octave);
 
                 const keyPos = naturalKeys.indexOf(keyLetter);
 
@@ -316,7 +323,6 @@ const app = {
             if (key.length === 2) {
                 const keyLetter = range[0][0];
                 const octave = range[0][1];
-                console.log(keyLetter, octave);
 
                 const keyPos = naturalKeys.indexOf(keyLetter);
 
@@ -346,18 +352,30 @@ const app = {
         key.classList.add(className, "key");
     
         key.addEventListener('mousedown', () => {
+            if(mode === 'chords') {
+                this.toggleNote(noteName);
+                return;
+            }
+
             this.displayNote(noteName);
             playNoteSymbol(noteName);
             app.mouse_down = true;
         });
 
         key.addEventListener('mouseup', () => {
+            if(mode === 'chords') {
+                return;
+            }
+
             this.hideNote(noteName);
             onNoteReleased(noteName);
             app.mouse_down = false;
         });
 
         key.addEventListener('mouseenter', () => {
+            if(mode === 'chords') {
+                return;
+            }
             if(app.mouse_down === true) {
                 this.displayNote(noteName);
                 playNoteSymbol(noteName);
@@ -365,6 +383,10 @@ const app = {
         })
 
         key.addEventListener('mouseleave', () => {
+            if(mode === 'chords') {
+                return;
+            }
+            
             this.hideNote(noteName);
             onNoteReleased(noteName);
         });
@@ -427,7 +449,6 @@ const app = {
         const keyboardKeys = document.querySelectorAll(".key");
 
         const displayText = document.querySelector(".menu-display");
-        console.log(displayText);
         displayText.innerHTML = note;
 
         keyboardKeys.forEach(key => {
@@ -452,6 +473,43 @@ const app = {
             if(naturalName === note || sharpName === note || flatName === note) {
                 key.classList.remove("show");
             }
+        });
+    },
+
+    toggleNote(note){
+        const keyboardKeys = document.querySelectorAll(".key");
+
+        keyboardKeys.forEach(key => {
+            const naturalName = key.dataset.noteName;
+            const sharpName = key.dataset.sharpName;
+            const flatName = key.dataset.flatName;
+
+            if(naturalName === note || sharpName === note || flatName === note) {
+                if (key.classList.contains('show')) {
+                    key.classList.remove("show");
+                } else {
+                    key.classList.add("show");
+                }
+            }
+        });
+
+        const selectedKeys = document.querySelectorAll(".show");
+        const displayText = document.querySelector(".menu-display");
+        selected = []
+
+        selectedKeys.forEach((note) => {
+            if (note.dataset.noteName) {
+                selected.push(note.dataset.noteName[0]);
+            } else {
+                selected.push(note.dataset.sharpName[0] + "#");
+            }
+        });
+
+        selected = selected.sort();
+        guessChord(selected).then(chord => {
+            if (chord) {
+                displayText.innerHTML = convertChordName(chord);
+            }            
         });
     },
 
